@@ -140,7 +140,7 @@ func main() {
 	var updatedVersionCodes, updatedVersionNames int
 
 	updatedBuildGradleContent, err := findAndUpdate(f, map[*regexp.Regexp]updateFn{
-		regexp.MustCompile(`^versionCode (?P<version_code>.*)`): func(line string, lineNum int, match []string) string {
+		regexp.MustCompile(`^versionCode = (?P<version_code>.*)`): func(line string, lineNum int, match []string) string {
 			oldVersionCode := match[1]
 			finalVersionCode = oldVersionCode
 			updatedLine := ""
@@ -154,7 +154,7 @@ func main() {
 
 			return updatedLine
 		},
-		regexp.MustCompile(`^versionName (?:"|')(?P<version_code>.*)(?:"|')`): func(line string, lineNum int, match []string) string {
+		regexp.MustCompile(`^versionName = (?:"|')(?P<version_code>.*)(?:"|')`): func(line string, lineNum int, match []string) string {
 			oldVersionName := match[1]
 			finalVersionName = oldVersionName
 			updatedLine := ""
